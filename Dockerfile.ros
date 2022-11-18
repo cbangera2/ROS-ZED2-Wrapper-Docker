@@ -39,6 +39,7 @@ RUN  . /opt/ros/${ROS_DISTRO}/setup.sh && \
 #Install Computer Vision Dependencies
 RUN apt-get install -y python3-pip
 RUN pip3 install torch torchvision torchaudio
+RUN pip3 install opencv-python
 RUN apt-get install -y \                                                            
      python3-rospkg*
 WORKDIR /opt/ros_ws
