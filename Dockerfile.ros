@@ -86,6 +86,9 @@ RUN echo $(ls /usr/local/cuda)
 RUN  . /opt/ros/${ROS_DISTRO_ARG}/setup.sh && \
     catkin_make
 
+#Clone Custom CV repo
+RUN git clone https://github.com/jiwon-jade-ai/mdp_cv.git
+
 # setup entrypoint
 COPY ./ros_entrypoint.sh /
 RUN chmod +x  /ros_entrypoint.sh
