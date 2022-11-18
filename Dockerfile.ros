@@ -46,6 +46,7 @@ RUN apt-get update
 RUN apt-get install -y python3-pip
 RUN pip3 install torch torchvision torchaudio
 RUN pip3 install opencv-python
+RUN pip3 install -U git+https://github.com/qubvel/segmentation_models.pytorch
 RUN apt-get install -y \                                                            
      python3-rospkg*
 WORKDIR /opt/ros_ws
@@ -57,12 +58,8 @@ RUN pwd  && \
 RUN apt-get install -y ros-$ROS_DISTRO-rtabmap-ros
 RUN apt-get install -y python3-catkin-tools
 
-#Install text editors
-RUN apt-get install -y nano
-RUN apt-get install -y vim
-
-#Install ZED ROS Wrapper Dependencies
-RUN apt-get install -y xcb
+#Install text editors and ZED ROS Dependencies
+RUN apt-get install -y nano vim emacs xcb
 
 #Install ZED ROS Wrapper
 WORKDIR /opt/ros_ws/src
