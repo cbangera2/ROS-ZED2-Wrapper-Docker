@@ -19,8 +19,13 @@ To Re-enter Docker Container After the First Time:
    2. ```docker exec -it (docker container's name) bash```
    
  
-
-
- 
+ To Run in Docker:
+   1. ```roslaunch zed_rtab_example zed_rtabmap.launch```
+   2. Wait 5 seconds before moving camera for initialization
+   3. ```roslaunch zed_warpper zed2.launch```
+   4. ```cd /opt/ros_ws/mdp_cv/src/seg_pkg/scripts```
+   5. ```python3 inf_class.py```
+   6. ```cd /opt/ros_ws/cv-low-level```
+   7. ```python3 hotdog.py```
 
 
