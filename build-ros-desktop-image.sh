@@ -12,7 +12,7 @@ set -e
 #    1 sets the ROS_DISTRO_ARG to ROS2 Foxy Fitzroy
 #    0 sets the ROS_DISTRO_ARG to ROS1 versions based on Ubuntu Release year 
 
-UBUNTU_RELEASE_YEAR=18 	#Specify the Ubunutu release year
+UBUNTU_RELEASE_YEAR=20 	#Specify the Ubunutu release year
 ZED_SDK_MAJOR=3 		# ZED SDK major version 
 ZED_SDK_MINOR=7 		# ZED SDK minor version
 CUDA_MAJOR=11 			# CUDA major version
