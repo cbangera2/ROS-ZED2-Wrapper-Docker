@@ -4,6 +4,7 @@ ARG ZED_SDK_MAJOR
 ARG ZED_SDK_MINOR
 ARG CUDA_MAJOR
 ARG CUDA_MINOR
+
 # Specify the parent image from which we build
 FROM stereolabs/zed:${ZED_SDK_MAJOR}.${ZED_SDK_MINOR}-gl-devel-cuda${CUDA_MAJOR}.${CUDA_MINOR}-ubuntu${UBUNTU_RELEASE_YEAR}.04
 ARG ROS_DISTRO_ARG
@@ -11,6 +12,7 @@ ENV LOGNAME root
 ENV ROS_DISTRO ${ROS_DISTRO_ARG}
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
+
 # Setup ROS
 RUN apt-get update -y || true && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata curl && \
@@ -24,6 +26,7 @@ RUN apt-get update -y || true && \
     curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add - && \
     apt-get update || true &&\
     DEBIAN_FRONTEND=noninteractive apt-get install -y ros-$ROS_DISTRO-desktop-full build-essential cmake usbutils libusb-1.0-0-dev git -y --allow-unauthenticated 
+
 # Install Packages depending on ROS distro
 RUN if [ "$ROS_DISTRO_ARG" = "noetic" ] ; then \
     apt-get install -y python3-rosdep python3-rosinstall  python3-rosinstall-generator python3-wstool ;\
@@ -31,12 +34,15 @@ RUN if [ "$ROS_DISTRO_ARG" = "noetic" ] ; then \
        apt-get install -y python-rosdep  python-rosinstall python-rosinstall-generator python-wstool ; \
     fi 
 RUN rm -rf /var/lib/apt/lists/*
+
 #Setup ROS workspace
 RUN mkdir -p /opt/ros_ws/src
 WORKDIR /opt/ros_ws
 RUN  . /opt/ros/${ROS_DISTRO}/setup.sh && \
     catkin_make         
+
 #Install Computer Vision Dependencies
+RUN apt-get update
 RUN apt-get install -y python3-pip
 RUN pip3 install torch torchvision torchaudio
 RUN pip3 install opencv-python
@@ -46,9 +52,18 @@ WORKDIR /opt/ros_ws
 RUN pwd  && \
      rosdep init && \
      rosdep update
-RUN apt-get update
+
+#Install RTAB
 RUN apt-get install -y ros-$ROS_DISTRO-rtabmap-ros
 RUN apt-get install -y python3-catkin-tools
+
+#Install text editors
+RUN apt-get install -y nano
+RUN apt-get install -y vim
+
+#Install ZED ROS Wrapper Dependencies
+RUN apt-get install -y xcb
+
 #Install ZED ROS Wrapper
 WORKDIR /opt/ros_ws/src
 RUN git clone --recursive https://github.com/stereolabs/zed-ros-wrapper.git && \
@@ -57,6 +72,7 @@ RUN git clone --recursive https://github.com/stereolabs/zed-ros-wrapper.git && \
 WORKDIR /opt/ros_ws
 RUN  . /opt/ros/${ROS_DISTRO}/setup.sh && \
     catkin_make
+
 #Install ZED ROS Examples
 WORKDIR /opt/ros_ws/src
 RUN git clone https://github.com/stereolabs/zed-ros-examples.git && \
@@ -65,12 +81,14 @@ RUN git clone https://github.com/stereolabs/zed-ros-examples.git && \
 WORKDIR /opt/ros_ws
 RUN  . /opt/ros/${ROS_DISTRO}/setup.sh && \
     catkin_make
+
 # Ensure in /opt/ros_ws/ and nvidia cuda of 11
 RUN pwd
 RUN nvcc --version
 RUN echo $(ls /usr/local/cuda)
 RUN  . /opt/ros/${ROS_DISTRO_ARG}/setup.sh && \
     catkin_make
+
 # setup entrypoint
 COPY ./ros_entrypoint.sh /
 RUN chmod +x  /ros_entrypoint.sh
