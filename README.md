@@ -10,6 +10,7 @@ To Run Docker for the First Time:
    1. ```xhost +si:localuser:root```  
    2. ```docker run -it --runtime nvidia --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix 3.7-ros-gl-devel-cuda11.4-ubuntu20.04``` 
    (may add ```--net=host``` flag for communication between docker and jackal)  
+
 To Re-enter Docker Container After the First Time (with Existing container):
    1. ```docker start (docker container's name)```  
    2. ```docker exec -it (docker container's name) bash```  
@@ -17,9 +18,11 @@ To Re-enter Docker Container After the First Time (with Existing container):
 ## Setup Docker Container: 
 Following precedure are required in every new termainal for docker container  
 Once Enter the Docker Container, you should see: 
-   root@(docker conatiner ID):/opt/ros_ws#  
+   root@(docker conatiner ID):/opt/ros_ws#
+
 Then Run:  
    1. ```source devel/setup.bash```  
+
 Open a New Terminal entering Jackal, Run:  
    3. ```ifconfig``` to obtain inet address under docker0 # For Example, 172.17.0.1  
 Then Go Back to Docker Container, Run:  
