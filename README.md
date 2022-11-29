@@ -16,9 +16,9 @@ To Re-enter Docker Container After the First Time (with Existing container):
    2. ```docker exec -it (docker container's name) bash```  
    
 ## Setup Docker Container: 
-Following precedure are required in every new termainal for docker container  
+Following precedure are required in every new terminal for docker container  
 Once Enter the Docker Container, you should see: 
-   root@(docker conatiner ID):/opt/ros_ws#
+   root@(docker container ID):/opt/ros_ws#
 
 Then Run:  
    1. ```source devel/setup.bash```  
@@ -32,7 +32,7 @@ Then Go Back to Docker Container, Run:
  To Run in Docker:
    1. ```roslaunch zed_rtab_example zed_rtabmap.launch```
    2. Wait 5 seconds before moving camera for initialization
-   3. ```roslaunch zed_warpper zed2.launch```
+   3. ```roslaunch zed_wrapper zed2.launch```
    4. ```cd /opt/ros_ws/mdp_cv/```
    5. ```python3 inf_class.py```
    6. ```cd /opt/ros_ws/cv-low-level```
