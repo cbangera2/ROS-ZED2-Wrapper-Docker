@@ -36,6 +36,9 @@ Then Go Back to Docker Container, Run:
    4. ```cd /opt/ros_ws/mdp_cv/```
    5. ```python3 inf_class.py```
    6. ```cd /opt/ros_ws/cv-low-level```
-   7. ```python3 hotdog.py```
+   7. ```python3 hotdog.py``` 
+   
+## Record Rosbag
+```rosbag record rosout tf zed/mapPath zed/zed_node/pose zed/map zed/zed_node/rgb/image_rect_color cv_nav/road_percentage```
 
 
