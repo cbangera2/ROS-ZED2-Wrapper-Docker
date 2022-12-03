@@ -16,7 +16,7 @@ To Re-enter Docker Container After the First Time (with Existing container):
    2. ```docker exec -it (docker container's name) bash```  
    
 ## Setup Docker Container: 
-Following precedure are required in every new terminal for docker container  
+Following procedure are required in every new terminal for docker container  
 Once Enter the Docker Container, you should see: 
    root@(docker container ID):/opt/ros_ws#
 
@@ -24,7 +24,7 @@ Then Run:
    1. ```source devel/setup.bash```  
 
 Open a New Terminal entering Jackal, Run:  
-   3. ```ifconfig``` to obtain inet address under docker0 # For Example, 172.17.0.1  
+   2. ```ifconfig``` to obtain inet address under docker0 # For Example, 172.17.0.1  
 Then Go Back to Docker Container, Run:  
    3. ```export ROS_Master_URI=http://172.17.0.1:11311/``` # Replace 172.17.0.1 with inet address  
 
