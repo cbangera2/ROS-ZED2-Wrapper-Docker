@@ -39,6 +39,4 @@ Then Go Back to Docker Container, Run:
    7. ```python3 hotdog.py``` 
    
 ## Record Rosbag
-```rosbag record rosout tf zed/mapPath zed/zed_node/pose zed/map zed/zed_node/rgb/image_rect_color cv_nav/road_percentage```
-
-
+```rosbag record rosout tf zed/mapPath zed/zed_node/pose zed/map zed/zed_node/rgb/image_rect_color cv_nav/road_percentage/forward cv_nav/road_percentage/rotateLeft cv_nav/road_percentage/rotateRight```
