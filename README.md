@@ -7,7 +7,7 @@ To Build Docker Image:
 
 ## Create Docker Container
 To Run Docker for the First Time:
-   1. ```xhost +si:localuser:root```  
+   1. ```xhost +si:localuser:root```  (only if it's not running on the robot)
    2. ```docker run -it --runtime nvidia --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix 3.7-ros-gl-devel-cuda11.4-ubuntu20.04``` 
    (may add ```--net=host``` flag for communication between docker and jackal)  
 
@@ -20,7 +20,7 @@ Following procedure are required in every new terminal for docker container
 Once Enter the Docker Container, you should see: 
    root@(docker container ID):/opt/ros_ws#
 
-Then Run:  
+Then Run: (in every terminal)  
    1. ```source devel/setup.bash```  
 
 Open a New Terminal entering Jackal, Run:  
